@@ -6,7 +6,6 @@ createApp({
         return {
             eventos: [],
             categorias: [],
-            filtradoEventosBusqueda: [],
             fechaActual: '',
             filasFuturas: [],
             filasPasadas:[],
@@ -31,9 +30,9 @@ createApp({
             this.eventoMayorAsistencia = porcentajeAsistenciaPorEvento.find(evento => evento[1] === mayorPorcentajeAsistencia)[0]
             const menorPorcentajeAsistencia = Math.min(...porcentajeAsistenciaPorEvento.map(evento => evento[1]))
             this.eventoMenorAsistencia = porcentajeAsistenciaPorEvento.find(evento => evento[1] === menorPorcentajeAsistencia)[0]
-            const eventoPorCapacidad = this.eventos.map(evento => [evento.name, evento.capacity])
-            const mayorCapacidad =  Math.max(...eventoPorCapacidad.map(evento => evento[1]))
-            this.eventoMayorCapacidad = eventoPorCapacidad.find(evento => evento[1] === mayorCapacidad)[0]
+            const eventosPorCapacidad = this.eventos.map(evento => [evento.name, evento.capacity])
+            const mayorCapacidad =  Math.max(...eventosPorCapacidad.map(evento => evento[1]))
+            this.eventoMayorCapacidad = eventosPorCapacidad.find(evento => evento[1] === mayorCapacidad)[0]
 
             this.filaGeneral = {
                 mayorAsistencia: mayorPorcentajeAsistencia,
@@ -80,13 +79,6 @@ createApp({
         .catch(error => console.log(error))
     },
 
-    methods: {
-        filtrarEventosBusqueda() {
-            console.log(this.textoBusqueda);
-            this.filtradoEventosBusqueda = this.eventos
-                .filter(evento => (this.categorias.length === 0 || this.categorias.includes(evento.category)) && evento.name.toLowerCase().includes(this.textoBusqueda.toLowerCase()))
-        }
-    },
 
 
 
